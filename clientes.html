@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>VetManager - Clientes</title>
+<link rel="stylesheet" href="css/clientes.css">
+<link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+
+<div id="navbar-container"></div>
+
+<div class="glass-container clients-layout">
+  <div class="clients-panel glass-card">
+
+    <!-- FILA SUPERIOR -->
+    <div class="clients-top">
+      <button id="prevPage">⬅</button>
+
+      <input type="text" id="searchInput" class="glass-input" placeholder="Buscar cliente...">
+      <button id="searchBtn">Buscar</button>
+
+      <button id="addBtn" class="btn-primary">➕ Agregar</button>
+
+      <button id="nextPage">➡</button>
+    </div>
+
+    <!-- A-Z -->
+    <div class="alphabet-bar" id="alphabetBar"></div>
+
+    <!-- LISTA -->
+    <div class="clients-scroll" id="clientsList"></div>
+
+  </div>
+</div>
+
+<!-- ================= MODAL CLIENTE ================= -->
+<div class="modal" id="clientModal">
+  <div class="glass-card">
+
+    <div class="modal-header">Nuevo Cliente / Mascota</div>
+
+    <div class="modal-body">
+      <form id="clientForm" class="client-grid">
+
+        <h4 class="section-title">Datos del Cliente</h4>
+
+        <label>Nombre</label>
+        <input class="glass-input">
+
+        <label>Apellido</label>
+        <input class="glass-input">
+
+        <label>Documento</label>
+        <input class="glass-input">
+
+        <label>Dirección</label>
+        <input class="glass-input">
+
+        <label>Teléfono</label>
+        <input class="glass-input">
+
+        <label>Email</label>
+        <input class="glass-input">
+
+        <label>WhatsApp</label>
+        <input class="glass-input">
+
+      </form>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" id="cancelBtn" class="btn-secondary">Cancelar</button>
+      <button type="submit" form="clientForm" class="btn-primary">Guardar</button>
+      <button type="button" id="editBtn" class="btn-secondary">Editar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= MODAL MASCOTA ================= -->
+<div class="modal" id="petModal">
+  <div class="glass-card">
+
+    <div class="modal-header">Mascota</div>
+
+    <div class="modal-body">
+      <form id="petForm" class="client-grid">
+
+        <label>Nombre de la mascota</label>
+        <input class="glass-input" name="petNombre">
+
+        <label>Fecha de nacimiento</label>
+        <input type="date" class="glass-input" name="petNacimiento">
+
+        <label>Especie</label>
+        <div class="custom-select" data-name="petEspecie">
+          <div class="select-selected">Seleccionar especie</div>
+
+          <div class="select-options">
+            <div class="option" data-value="canino">Canino</div>
+            <div class="option" data-value="felino">Felino</div>
+            <div class="option" data-value="ave">Ave</div>
+          </div>
+        </div>
+
+        <label>Género</label>
+        <div class="custom-select" data-name="petGenero">
+          <div class="select-selected">Seleccionar género</div>
+
+          <div class="select-options">
+            <div class="option" data-value="macho">Macho</div>
+            <div class="option" data-value="hembra">Hembra</div>
+          </div>
+        </div>
+
+        <label>Raza</label>
+        <div class="custom-select" data-name="petRaza">
+          <div class="select-selected">Seleccionar raza</div>
+
+          <div class="select-options">
+            <div class="option" data-value="labrador">Labrador</div>
+            <div class="option" data-value="caniche">Caniche</div>
+            <div class="option" data-value="siames">Siamés</div>
+          </div>
+        </div>
+
+        <label class="section-title">Descripción</label>
+        <textarea class="glass-input" name="petDescripcion"></textarea>
+
+        <button type="button" id="addFichaBtn" class="btn-secondary">
+          ➕ Agregar ficha
+        </button>
+
+        <div class="fichas-panel" id="fichasPanel"></div>
+
+        </form>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" id="cancelPetBtn" class="btn-secondary">Cerrar</button>
+      <button type="button" id="editPetBtn" class="btn-secondary">Editar</button>
+      <button type="submit" form="petForm" class="btn-primary">Guardar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= MODAL FICHA CLÍNICA ================= -->
+<div class="modal" id="fichaModal">
+  <div class="glass-card">
+
+    <div class="modal-header">Ficha clínica</div>
+
+    <div class="modal-body">
+      <form id="fichaForm" class="client-grid">
+
+        <label>Peso (kg)</label>
+        <input class="glass-input" name="peso">
+
+        <label>Temperatura (°C)</label>
+        <input class="glass-input" name="temp">
+
+        <label>Anamnesis / Tratamiento / Observaciones</label>
+        <textarea class="glass-input" name="obs"></textarea>
+
+        <label>Veterinario</label>
+        <input class="glass-input" name="vet">
+
+        <label>Adjuntar imágenes o archivos</label>
+
+        <input 
+          type="file" 
+          class="glass-input" 
+          id="fichaFiles"
+          multiple
+          accept="image/*,.pdf,.doc,.docx"
+        />
+
+        <div id="filesPreview" class="files-preview"></div>
+
+      </form>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" id="cancelFichaBtn" class="btn-secondary">Cerrar</button>
+      <button type="button" id="editFichaBtn" class="btn-secondary">Editar</button>
+      <button type="submit" form="fichaForm" class="btn-primary">Guardar</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ================= MODAL SELECT ================= -->
+<div id="catalogModal" class="modal">
+  <div class="glass-card small">
+
+    <h3>Administrar</h3>
+
+    <div id="catalogList"></div>
+
+    <input id="newOption" placeholder="Nueva opción">
+
+    <button id="addOption">Agregar</button>
+    <button id="saveCatalog">Guardar</button>
+
+  </div>
+</div>
+
+
+<script src="js/navbar.js"></script>
+<script src="js/waiting.js"></script>
+<script src="js/clientes.js"></script>
+<!-- ================= NAVBAR SCRIPT ================= -->
+    <script>
+    fetch("components/navbar.html")
+.then(res => res.text())
+.then(html => {
+    document.getElementById("navbar-container").innerHTML = html;
+    initNavbar();
+});
+
+    fetch("components/waiting.html")
+    .then(res => res.text())
+    .then(html => {
+        document.body.insertAdjacentHTML("beforeend", html);
+
+        cargarServiciosWaiting();
+        cargarClientesWaiting();
+        renderWaiting();
+
+        inicializarSelects(); // 🔥 importante
+    });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --primary-color: #a8e2ec;
+    --text-color: #ffffff;
+    --dark-bg: rgba(20, 40, 60, 0.95);
+    --text-main: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+}
+
+/* 1. Base y Scrollbar Global */
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #20ad8d 0%, #023e8a 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--text-color);
+  overflow: hidden auto; /* 👈 permite scroll vertical */
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; backdrop-filter: blur(5px); }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
+/* 2. Contenedores Principales */
+.glass-container {
+  margin: 0 auto 20px;
+  width: min(1000px, 100%);
+  flex: 1;
+  gap: 20px;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  padding-inline: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 300px;
+  flex-shrink: 0; /* 👈 evita que se aplaste */
+}
+
+.agenda-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  min-height: 0;
+}
+
+.time-grid-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.glass-card {
+    /* Unificamos el fondo para que tenga el gradiente sutil y el blur */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 3. Sidebar y Calendario */
+.sidebar { width: 300px; display: flex; flex-direction: column; gap: 20px; }
+.selector-profesional { width: 100%; }
+.selector-profesional label { font-weight: 500; font-size: 0.9rem; margin-bottom: 8px; display: block; }
+
+.calendar-header { display: flex; justify-content: space-between; align-items: center; padding: 10px; }
+.calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.7rem; font-weight: bold; opacity: 0.7; margin-bottom: 10px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; padding: 10px; }
+.calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.calendar-day:hover { background: rgba(255, 255, 255, 0.2); }
+.calendar-day.today { background: var(--primary-color); color: #023e8a; font-weight: bold; }
+
+/* 4. Agenda y Grilla */
+.agenda-view { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; }
+.agenda-header { padding: 20px 20px 10px; background: rgba(255, 255, 255, 0.05); }
+.time-grid-container { flex-grow: 1; overflow-y: auto; padding: 0 20px 20px; scrollbar-gutter: stable; }
+.time-grid-container::-webkit-scrollbar-track { margin: 15px 0; }
+.time-grid { display: grid; grid-template-columns: 80px 1fr; gap: 5px; }
+.time-label { font-size: 0.8rem; padding: 10px 0; border-bottom: 1px solid var(--glass-border); }
+.time-label {
+    color: var(--text-muted); /* Las horas se ven pero no distraen */
+    font-weight: 300;
+}
+.time-slot { background: rgba(255, 255, 255, 0.05); height: 40px; border-radius: 5px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; padding-left: 15px; }
+.time-slot:hover { background: rgba(255, 255, 255, 0.2); }
+
+.time-slot span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 5. Inputs y Custom Select */
+.glass-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.custom-select { position: relative; width: 100%; user-select: none; }
+.select-trigger { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+
+.select-options {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    margin-top: 8px;
+    background: var(--dark-bg) !important;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.custom-select.active .select-options { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.option { padding: 12px 15px; cursor: pointer; transition: 0.2s; }
+.option:hover { background: rgba(255, 255, 255, 0.1); }
+.option.selected { color: var(--primary-color); font-weight: bold; }
+
+.arrow {
+    width: 8px; height: 8px;
+    border-right: 2px solid white; border-bottom: 2px solid white;
+    transform: rotate(45deg); transition: 0.3s; margin-bottom: 4px;
+}
+.active .arrow { transform: rotate(-135deg); margin-bottom: -4px; }
+
+/* 6. Modal y Formulario */
+.modal-overlay {
+    position: fixed;
+    inset: 0; /* reemplaza top/left/width/height */
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;  
+    z-index: 99999; /* 🔥 más alto que cualquier navbar */
+}
+.hidden { display: none; }
+.modal-content { width: 400px; padding: 30px;  position: relative; max-height:90vh; overflow-y:auto;}
+
+.form-group { position: relative; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.form-group label { font-size: 0.85rem; font-weight: 500; color: var(--primary-color); }
+
+/* Control de capas para que los selects de arriba tapen a los de abajo */
+.form-group:nth-child(1) { z-index: 100; }
+.form-group:nth-child(2) { z-index: 90; }
+.form-group:nth-child(3) { z-index: 80; }
+
+.btn-primary, .btn-secondary { border: none; padding: 12px 25px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-primary { background: var(--primary-color); color: #023e8a; }
+.btn-secondary { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid var(--glass-border); }
+.btn-primary:active { transform: scale(0.95); }
+
+input[type="time"].glass-input {
+    color-scheme: dark; /* Hace que el selector nativo sea oscuro en navegadores modernos */
+    cursor: pointer;
+}
+
+/* Clase para animar el error */
+.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.error-msg {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    text-align: center;
+    display: none; /* Se activa con JS */
+}
+
+.btn-danger {
+    background: rgba(255, 107, 107, 0.2);
+    border: 1px solid rgba(255, 107, 107, 0.5);
+    color: #ff6b6b;
+    padding: 12px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-danger:hover {
+    background: rgba(255, 107, 107, 0.4);
+}
+
+.hidden { display: none !important; }
+
+.select-trigger {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.select-input{
+  background:transparent;
+  border:none;
+  outline:none;
+  width:100%;
+  color:white;
+  font-size:14px;
+}
+
+.select-input::placeholder{
+  color:rgba(255,255,255,0.7);
+}
+

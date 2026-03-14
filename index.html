@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetManager - Agenda Glass</title>
+    <link rel="stylesheet" href="css/agenda.css">
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+    
+    <div class="glass-container">
+        <!-- 1. Sidebar Izquierda -->
+        <aside class="sidebar">
+            <div class="selector-profesional">
+                <label>Veterinario:</label>
+                <div class="custom-select" id="select-profesional">
+                    <div class="select-trigger glass-input">
+                        <span>Dr. Juan Pérez</span>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="select-options glass-card"></div>
+                </div>
+            </div>
+            
+            <div class="mini-calendar glass-card">
+                <div class="calendar-header">
+                    <button id="prevMonth" class="btn-nav">&lt;</button>
+                    <h3 id="monthDisplay">Febrero 2026</h3>
+                    <button id="nextMonth" class="btn-nav">&gt;</button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
+                </div>
+                <div class="calendar-grid" id="calendar-days"></div>
+            </div>
+        </aside>
+
+        <!-- 2. Agenda Derecha (Main) -->
+        <main class="agenda-view glass-card">
+            <header class="agenda-header">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; width: 100%;">
+                    <h2 style="margin:0">Agenda del Día</h2>
+                    <span id="fecha-seleccionada" style="font-weight: 500; opacity: 0.8; font-size: 0.9rem; margin-left: 10px;">
+                        <!-- JS inyectará la fecha aquí -->
+                    </span>
+                </div>
+            </header>
+            
+            <div class="time-grid-container">
+                <div class="time-grid" id="time-grid">
+                    <!-- JS generará los bloques aquí -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Turno -->
+    <div id="modal-turno" class="modal-overlay hidden">
+    <div class="modal-content glass-card">
+        <h3>Agendar Turno</h3>
+
+        <form id="form-turno">
+
+        <!-- Rango Horario -->
+        <div style="display:flex; gap:10px;">
+            <div class="form-group" style="flex:1;">
+            <label>Inicio:</label>
+            <input type="time" id="hora-inicio" class="glass-input" step="900" required>
+            </div>
+            <div class="form-group" style="flex:1;">
+            <label>Fin:</label>
+            <input type="time" id="hora-fin" class="glass-input" step="900" required>
+            </div>
+        </div>
+
+        <!-- Servicio -->
+        <div class="form-group">
+            <label>Servicio:</label>
+            <div class="custom-select" id="select-servicio">
+            <div class="select-trigger glass-input">
+                <span>Seleccionar servicio</span>
+                <div class="arrow"></div>
+            </div>
+            <div class="select-options glass-card"></div>
+            </div>
+        </div>
+
+        <!-- Cliente -->
+        <div class="form-group">
+            <label>Cliente:</label>
+            <div class="custom-select" id="select-cliente">
+
+            <div class="select-trigger glass-input">
+                <input 
+                type="text"
+                class="select-input"
+                placeholder="Buscar cliente..."
+                autocomplete="off"
+                >
+                <div class="arrow"></div>
+            </div>
+
+            <div class="select-options glass-card"></div>
+
+            </div>
+        </div>
+
+        <!-- Mascota -->
+        <div class="form-group">
+            <label>Mascota:</label>
+            <div class="custom-select" id="select-mascota">
+            <div class="select-trigger glass-input">
+                <span>Seleccionar mascota</span>
+                <div class="arrow"></div>
+            </div>
+
+            <!-- aquí JS también insertará buscador -->
+            <div class="select-options glass-card"></div>
+
+            </div>
+        </div>
+
+        <!-- Observaciones -->
+        <div class="form-group">
+            <label>Observaciones:</label>
+            <textarea id="observaciones" class="glass-input" rows="2" placeholder="Notas..."></textarea>
+        </div>
+
+        <!-- Botones -->
+        <div class="modal-actions">
+            <div style="display:flex; gap:10px; margin-left:auto;">
+            <button type="button" id="btn-eliminar" class="btn-danger hidden">Eliminar</button>
+            <button type="button" id="btn-editar" class="btn-secondary hidden">Editar Turno</button>
+
+            <button type="button" onclick="cerrarModal()" class="btn-secondary" id="btn-cancelar">Cancelar</button>
+            <button type="submit" id="btn-confirmar" class="btn-primary">Confirmar</button>
+            </div>
+        </div>
+
+        </form>
+    </div>
+    </div>
+    
+    <script src="js/navbar.js"></script>
+    <script src="js/waiting.js"></script>
+    <script src="js/agenda.js"></script>
+
+    <script>
+    fetch("components/navbar.html")
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById("navbar-container").innerHTML = html;
+
+        // Ahora sí los modales y botones existen
+        initNavbar(); 
+    });
+
+    fetch("components/waiting.html")
+    .then(res => res.text())
+    .then(html => {
+        document.body.insertAdjacentHTML("beforeend", html);
+    });
+    </script>
+</body>
+</html>

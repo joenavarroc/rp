@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - VetManager</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/agenda.css">
+</head>
+<body>
+<nav class="top-nav glass-card">
+  <div class="nav-left">
+    <span class="app-title">🐾 Rp/ Veterinary</span>
+  </div>
+
+  <div class="nav-links">
+    <button id="waitingBtn" class="settings-btn" aria-label="Sala de espera">
+      <span id="waiting-count" class="waiting-badge">0</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </button>
+    <a href="index.html" class="nav-link">Agenda</a>
+    <a href="clientes.html" class="nav-link">Clientes</a>
+
+    <div class="settings-wrapper">
+      <button id="settingsBtn" class="settings-btn" aria-label="Configuración">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
+                stroke="currentColor" stroke-width="2"/>
+          <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.53V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.53 1.7 1.7 0 0 0-1.87.34l-.06.06A2 2 0 1 1 3.28 17l.06-.06A1.7 1.7 0 0 0 3.62 15a1.7 1.7 0 0 0-1.53-1H2a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.53-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06A2 2 0 1 1 6.05 3.28l.06.06A1.7 1.7 0 0 0 8 3.62a1.7 1.7 0 0 0 1-1.53V2a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.53 1.7 1.7 0 0 0 1.87-.34l.06-.06A2 2 0 1 1 20.72 7l-.06.06a1.7 1.7 0 0 0-.34 1.87c.22.55.74.93 1.33 1.03H22a2 2 0 1 1 0 4h-.09c-.59.1-1.11.48-1.33 1.03Z"
+                stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
+
+      <div id="settingsMenu" class="settings-menu hidden">
+        <button id="btnVets">Veterinarios</button>
+        <button id="btnServices">Servicios</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    <div id="modal-servicios" class="modal-overlay hidden">
+  <div class="modal-content glass-card">
+
+    <h3>Servicios</h3>
+
+    <form id="form-servicio">
+
+      <input type="hidden" id="servicio-editando">
+
+      <div class="form-group">
+        <label>Nombre del servicio</label>
+        <input type="text" id="servicio-nombre" class="glass-input" required>
+      </div>
+
+      <div class="form-group">
+        <label>Color</label>
+        <input type="color" id="servicio-color" class="glass-input" value="#72efdd">
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button type="submit" class="btn-primary">Guardar</button>
+        <button type="button" onclick="cerrarModalServicios()" class="btn-secondary">Cerrar</button>
+      </div>
+
+    </form>
+
+    <ul id="lista-servicios" style="margin-top:15px; padding:0; list-style:none;"></ul>
+
+  </div>
+</div>
+
+<div id="modal-vets" class="modal-overlay hidden">
+  <div class="modal-content glass-card">
+
+    <h3>Veterinarios</h3>
+
+    <form id="form-vet">
+
+      <input type="hidden" id="vet-editando">
+
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" id="vet-nombre" class="glass-input" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="vet-email" class="glass-input" required>
+      </div>
+
+      <div class="form-group">
+        <label>Clave provisional</label>
+        <input type="text" id="vet-clave" class="glass-input" placeholder="temporal123">
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button type="submit" class="btn-primary">Guardar</button>
+        <button type="button" onclick="cerrarModalVets()" class="btn-secondary">Cerrar</button>
+      </div>
+
+    </form>
+
+    <ul id="lista-vets"></ul>
+
+  </div>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="js/navbar.js"></script>
+    <script src="js/waiting.js"></script>
+    <script src="js/agenda.js"></script>
+
+    <script>
+        // 🔹 Inicializar navbar
+        initNavbar();
+    </script>
+
+</body>
+</html>
