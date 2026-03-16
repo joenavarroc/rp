@@ -1,0 +1,448 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --primary-color: #a8e2ec;
+    --text-color: #ffffff;
+    --dark-bg: rgba(20, 40, 60, 0.95);
+    --text-main: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+}
+
+.top-nav {
+  width: min(960px, 100%);
+  margin: 20px auto 10px;
+  height: 60px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 5000;
+  padding-inline: 20px;
+  box-sizing: border-box;
+}
+
+.glass-card {
+    /* Unificamos el fondo para que tenga el gradiente sutil y el blur */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Modal de servicios (viene del navbar) */
+.modal-overlay {
+  position: fixed; 
+  top: 0; left: 0; 
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 400px; 
+  padding: 30px; 
+  overflow: visible; 
+  position: relative;
+}
+
+.hidden { 
+  display: none !important; 
+}
+
+.btn-nav { background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; }
+
+.app-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: 0.25s;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--glass-border);
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.nav-link.active {
+  background: var(--primary-color);
+  color: #023e8a;
+  font-weight: bold;
+}
+
+/* settings */
+
+.settings-wrapper {
+  position: relative;
+}
+
+.settings-btn {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.settings-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: rotate(25deg);
+}
+
+.gear-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.settings-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: var(--dark-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+  z-index: 2000;
+}
+
+.settings-menu button {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+}
+
+.settings-menu button:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal de servicios (viene del navbar) */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 👈 en vez de center */
+    padding-top: 90px;       /* 👈 altura del navbar */
+
+    z-index: 99999;
+}
+
+.modal-content {
+  width: 400px; 
+  padding: 30px; 
+  overflow: visible; 
+  position: relative;
+}
+
+.hidden { 
+  display: none !important; 
+}
+
+.btn-nav { background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; }
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: 0.25s;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--glass-border);
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* settings */
+
+.settings-wrapper {
+  position: relative;
+}
+
+.settings-btn {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+  position:relative;
+}
+
+.settings-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: rotate(25deg);
+}
+
+.gear-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.settings-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: var(--dark-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+  z-index: 2000;
+}
+
+.settings-menu button {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+}
+
+.settings-menu button:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.hidden {
+  display: none;
+}
+
+/* modal servicios */
+
+/* ===== MODAL SERVICIOS ===== */
+#modal-servicios .modal-content {
+  width: 420px;
+  padding: 30px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  color: var(--text-color);
+}
+
+#modal-servicios h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+/* lista de servicios */
+#lista-servicios {
+  margin-top: 15px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* cada fila */
+#lista-servicios li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+/* botones editar / borrar */
+#lista-servicios button {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--glass-border);
+  color: white;
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+#lista-servicios button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* inputs del modal */
+#modal-servicios input[type="text"],
+#modal-servicios input[type="color"] {
+  width: 100%;
+}
+
+#modal-servicios input[type="color"] {
+  width: 50px;
+  height: 40px;
+  padding: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* para que no herede estilo de input texto */
+#modal-servicios input[type="color"].glass-input {
+  background: transparent;
+}
+
+/* limitar alto del modal */
+#modal-servicios .modal-content {
+  max-height: 70vh;          /* 👈 no puede pasar del 70% de la pantalla */
+  display: flex;
+  flex-direction: column;
+}
+
+/* la lista scrollea */
+#lista-servicios {
+  max-height: 250px;        /* 👈 ajustá a gusto */
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* scrollbar glass */
+#lista-servicios::-webkit-scrollbar {
+  width: 6px;
+}
+#lista-servicios::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+#lista-servicios::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
+
+
+/* ===== MODAL VETERINARIOS ===== */
+
+#modal-vets .modal-content{
+  width:420px;
+  max-height:70vh;
+  display:flex;
+  flex-direction:column;
+}
+
+#lista-vets{
+  margin-top:15px;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-height:250px;
+  overflow-y:auto;
+}
+
+#lista-vets li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  padding:8px 12px;
+}
+
+#lista-vets button{
+  background:rgba(255,255,255,0.1);
+  border:1px solid var(--glass-border);
+  color:white;
+  border-radius:8px;
+  padding:4px 8px;
+  cursor:pointer;
+}
+
+#lista-vets button:hover{
+  background:rgba(255,255,255,0.25);
+}
+
+
+.waiting-badge{
+position:absolute;
+top:-5px;
+right:-5px;
+background:#ff4d4d;
+color:white;
+font-size:11px;
+padding:2px 6px;
+border-radius:10px;
+font-weight:bold;
+}
+
+#lista-espera li{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:6px 10px;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.waiting-delete{
+background:none;
+border:none;
+color:#ff6b6b;
+font-size:16px;
+cursor:pointer;
+}
+
+.app-title{
+  display:flex;
+  flex-direction:column;
+  line-height:1.2;
+}
+
+.app-subtitle{
+  font-size:12px;
+  opacity:0.8;
+}

@@ -1,0 +1,74 @@
+<div id="modal-waiting" class="modal-overlay hidden">
+<div class="modal-content glass-card">
+
+<h3>Sala de Espera</h3>
+
+<form id="form-waiting">
+
+<!-- SERVICIO -->
+<div class="form-group">
+<label>Servicio</label>
+
+<div class="custom-select" id="waiting-servicio">
+<div class="select-trigger glass-input">
+<span>Seleccionar servicio</span>
+<div class="arrow"></div>
+</div>
+
+<div class="select-options glass-card"></div>
+</div>
+</div>
+
+<!-- CLIENTE -->
+<div class="form-group">
+<label>Cliente</label>
+
+<div class="custom-select" id="waiting-cliente">
+
+<div class="select-trigger glass-input">
+<input
+type="text"
+class="select-input"
+placeholder="Buscar cliente..."
+autocomplete="off"
+>
+<div class="arrow"></div>
+</div>
+
+<div class="select-options glass-card"></div>
+
+</div>
+</div>
+
+
+<!-- MASCOTA -->
+<div class="form-group">
+<label>Mascota</label>
+
+<div class="custom-select" id="waiting-mascota">
+<div class="select-trigger glass-input">
+<span>Seleccionar mascota</span>
+<div class="arrow"></div>
+</div>
+
+<div class="select-options glass-card"></div>
+</div>
+</div>
+
+<div class="modal-actions">
+<button type="button" onclick="cerrarWaiting()" class="btn-secondary">
+Cerrar
+</button>
+
+<button type="button" onclick="agregarAEspera()" class="btn-primary">
+Agregar a espera
+</button>
+</div>
+
+</form>
+
+<ul id="lista-espera"></ul>
+
+</div>
+</div>
+

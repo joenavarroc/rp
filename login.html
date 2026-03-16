@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auth</title>
+
+<link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- LOGIN -->
+  <form id="loginForm" class="form active">
+
+    <h2 class="title">Iniciar sesión</h2>
+
+    <input type="email" name="email" placeholder="Email" class="input" required>
+    <input type="password" name="password" placeholder="Password" class="input" required>
+
+    <button type="submit" class="main-btn">Iniciar sesión</button>
+
+    <button type="button" class="google-btn">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+      Iniciar sesión con Google
+    </button>
+
+    <p class="switch">
+      ¿No tienes una cuenta?
+      <span id="goRegister">Registrarse</span>
+    </p>
+
+  </form>
+
+
+  <!-- REGISTER -->
+  <form id="registerForm" class="form">
+
+    <h2 class="title">Registrarse</h2>
+
+    <input type="text" name="name" placeholder="Name" class="input">
+    <input type="email" name="email" placeholder="Email" class="input">
+    <input type="password" name="password" placeholder="Password" class="input">
+
+    <button class="main-btn">Crear Cuenta</button>
+
+    <p class="switch">
+      ¿Ya tienes una cuenta?
+      <span id="goLogin">Iniciar sesión</span>
+    </p>
+
+  </form>
+
+</div>
+<script type="module" src="js/login.js"></script>
+    
+</body>
+</html>
